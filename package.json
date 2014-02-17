@@ -1,6 +1,6 @@
 {
   "name": "damals",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Reports the approximate time ago in words from a specific past date",
   "main": "index.js",
   "repository": {
