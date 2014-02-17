@@ -48,7 +48,7 @@ Or you can permanently change the default locale with:
 timeAgo.configure({ locale: "de" });
 ```
 
-In order to retrieve the default configuration just read the `defaults` property:
+In order to retrieve the [default configuration](defaults.js) just read the `defaults` property:
 
 ```js
 timeAgo.defaults // => { locale: 'en', translations: { en: { ... } } }
