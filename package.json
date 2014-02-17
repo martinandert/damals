@@ -1,0 +1,38 @@
+{
+  "name": "damals",
+  "version": "0.5.0",
+  "description": "Reports the approximate time ago in words from a specific past date",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/natekross/damals"
+  },
+  "keywords": [
+    "elapsed",
+    "relative",
+    "time",
+    "ago"
+  ],
+  "author": {
+    "name": "Nathan Kross",
+    "email": "natekross@gmail.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "make test"
+  },
+  "bugs": {
+    "url": "https://github.com/natekross/damals/issues"
+  },
+  "homepage": "https://github.com/natekross/damals",
+  "devDependencies": {
+    "semver": "~2.2.1",
+    "node-dev": "~2.1.6",
+    "jshint": "~2.4.3",
+    "mocha": "~1.17.1",
+    "to-date": "~0.1.0"
+  },
+  "dependencies": {
+    "extend": "~1.2.1"
+  }
+}
