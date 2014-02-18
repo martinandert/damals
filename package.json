@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/natekross/damals"
+    "url": "git://github.com/martinandert/damals"
   },
   "keywords": [
     "elapsed",
@@ -14,17 +14,17 @@
     "ago"
   ],
   "author": {
-    "name": "Nathan Kross",
-    "email": "natekross@gmail.com"
+    "name": "Martin Andert",
+    "email": "mandert@gmail.com"
   },
   "license": "MIT",
   "scripts": {
     "test": "make test"
   },
   "bugs": {
-    "url": "https://github.com/natekross/damals/issues"
+    "url": "https://github.com/martinandert/damals/issues"
   },
-  "homepage": "https://github.com/natekross/damals",
+  "homepage": "https://github.com/martinandert/damals",
   "devDependencies": {
     "semver": "~2.2.1",
     "node-dev": "~2.1.6",
