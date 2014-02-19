@@ -20,7 +20,7 @@ The module exports a function which when called expects as sole argument a past 
 var timeAgo = require('damals');
 
 timeAgo(Date.now())             // => "just now"
-timeAgo(new Date())             // => "just now"
+timeAgo(Date.now() - 30000)     // => "half a minute ago"
 timeAgo(new Date("1976-12-10")) // => "about 37 years ago"
 ```
 
@@ -35,7 +35,8 @@ By default, all output is in English, but you can easily change this. Damals use
 var translator = require('globalization');
 var timeAgo    = require('damals');
 
-translator.registerTranslations(timeAgo.translationScope, 'es', require('./locales/es'));
+translator.registerTranslations(
+    timeAgo.translationScope, 'es', require('./locales/es'));
 // or you can call the provided shortcut function which does the same:
 timeAgo.registerTranslations('es', require('./locales/es'));
 
@@ -50,7 +51,7 @@ timeAgo(Date.now())   // => "en este momento"
 The translation data you provide as last argument to `registerTranslations` must have the same keys as specified in [the English locale file](locales/en.json).
 
 
-# Built-in Translations
+### Built-in Translations
 
 Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed. Luckily, damals has a helper function for this:
 
@@ -58,10 +59,11 @@ Apart from English, damals comes with built-in support for the German language (
 timeAgo.registerBuiltInTranslations('de');
 
 // which is a shortcut for calling
-timeAgo.registerTranslations('de', require(damals_package_dir + '/locales/en'))
+timeAgo.registerTranslations('de', require(damals_package_dir + '/locales/de'))
 
 // which is again a shortcut for calling
-translator.registerTranslations(timeAgo.translationScope, 'de', require(damals_package_dir + '/locales/en'))
+translator.registerTranslations(
+    timeAgo.translationScope, 'de', require(damals_package_dir + '/locales/de'))
 ```
 
 Pull requests which add other locales are welcome.
