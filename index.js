@@ -1,84 +1,74 @@
-"use strict";
+'use strict';
 
-var extend   = require("extend");
-var defaults = require("./defaults");
-var config   = extend({}, defaults);
+var translate = require('globalization').translate;
+var translationScope = 'damals';
 
-function configure(options) {
-  return extend(true, config, options);
-}
-
-function damals(date, options) {
-  options = extend(true, {}, config, options);
-
-  var tx   = options.translations[options.locale];
+function damals(date) {
   var now  = Date.now();
-  var then = typeof date === "number" ? date : date.getTime();
+  var then = typeof date === 'number' ? date : date.getTime();
 
   // the future is now
   then = Math.min(then, now);
 
-  var min = Math.round((now - then) / 60000.0);
-  var sec = Math.round((now - then) / 1000.0);
+  var minutes = Math.round((now - then) / 60000.0);
+  var seconds = Math.round((now - then) / 1000.0);
 
-  switch (true) {
-    case (min < 2):
-      switch (true) {
-        case (sec <= 10):
-          return tx.just_now;
-        case (sec < 20):
-          return tx.less_than_x_seconds.replace(/%x/, 20);
-        case (sec < 40):
-          return tx.half_a_minute;
-        case (sec < 60):
-          return tx.less_than_one_minute;
-        default:
-          return tx.one_minute;
-      }
-      break;
-    case (min <= 45):
-      return tx.x_minutes.replace(/%x/, min);
-    case (min <= 90):
-      return tx.about_one_hour;
-    case (min <= 1440): // 24 hours
-      return tx.about_x_hours.replace(/%x/, Math.round(min / 60.0));
-    case (min <= 2520): // 42 hours
-      return tx.about_one_day;
-    case (min <= 36000): // 25 days
-      return tx.x_days.replace(/%x/, Math.round(min / 1440.0));
-    case (min <= 86400): // 60 days
-      var months = Math.round(min / 43200.0);
-
-      if (months == 1) {
-        return tx.about_one_month;
-      } else {
-        return tx.about_x_months.replace(/%x/, Math.round(min / 43200.0));
-      }
-      break;
-    case (min <= 525600): // 365 days
-      return tx.x_months.replace(/%x/, Math.round(min / 43200.0));
-    default:
-      var remainder = min % 525600;
-      var years = Math.floor(min / 525600);
-
-      if (remainder < 131400) {
-        if (years == 1) {
-          return tx.about_one_year.replace(/%x/, years);
-        } else {
-          return tx.about_x_years.replace(/%x/, years);
+  return translate.withScope(translationScope, function() {
+    switch (true) {
+      case (minutes < 2):
+        switch (true) {
+          case (seconds <= 10):
+            return translate('just_now');
+          case (seconds < 20):
+            return translate('less_than_x_seconds_ago', { count: 20 });
+          case (seconds < 40):
+            return translate('half_a_minute_ago');
+          case (seconds < 60):
+            return translate('less_than_x_minutes_ago', { count: 1 });
+          default:
+            return translate('x_minutes_ago',           { count: 1 });
         }
-      } else if (remainder < 394200) {
-        if (years == 1) {
-          return tx.over_one_year.replace(/%x/, years);
+        break;
+      case (minutes < 45): // 2 mins up to 45 mins
+        return translate('x_minutes_ago',       { count: minutes });
+      case (minutes < 90): // 45 mins up to 90 mins
+        return translate('about_x_hours_ago',   { count: 1 });
+      case (minutes < 1440): // 90 mins up to 24 hours
+        return translate('about_x_hours_ago',   { count: Math.round(minutes / 60.0) });
+      case (minutes < 2520): // 24 hours up to 42 hours
+        return translate('x_days_ago',          { count: 1 });
+      case (minutes < 43200): // 42 hours up to 30 days
+        return translate('x_days_ago',          { count: Math.round(minutes / 1440.0) });
+      case (minutes < 86400): // 30 days up to 60 days
+        return translate('about_x_months_ago',  { count: Math.round(minutes / 43200.0) });
+      case (minutes < 525600): // 60 days up to 365 days
+        return translate('x_months_ago',        { count: Math.round(minutes / 43200.0) });
+      default:
+        var remainder = minutes % 525600;
+        var years = Math.floor(minutes / 525600);
+
+        if (remainder < 131400) {
+          return translate('about_x_years_ago',   { count: years });
+        } else if (remainder < 394200) {
+          return translate('over_x_years_ago',    { count: years });
         } else {
-          return tx.over_x_years.replace(/%x/, years);
+          return translate('almost_x_years_ago',  { count: years + 1 });
         }
-      } else {
-        return tx.almost_x_years.replace(/%x/, years + 1);
-      }
-  }
+    }
+  });
 }
 
-module.exports            = damals;
-module.exports.configure  = configure;
-module.exports.defaults   = defaults;
+function registerTranslations(locale, data) {
+  translate.registerTranslations(translationScope, locale, data);
+}
+
+function registerBuiltInTranslations(locale) {
+  registerTranslations(locale, require('./locales/' + locale));
+}
+
+registerBuiltInTranslations('en');
+
+module.exports = damals;
+module.exports.translationScope = translationScope;
+module.exports.registerTranslations = registerTranslations;
+module.exports.registerBuiltInTranslations = registerBuiltInTranslations;

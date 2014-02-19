@@ -19,44 +19,67 @@ The module exports a function which when called expects as sole argument a past 
 ```js
 var timeAgo = require('damals');
 
-timeAgo(Date.now())   // => "just now"
-timeAgo(new Date())   // => "just now"
+timeAgo(Date.now())             // => "just now"
+timeAgo(new Date())             // => "just now"
 timeAgo(new Date("1976-12-10")) // => "about 37 years ago"
 ```
 
-The only language provided is English. You can set the translations for the default or for a different locale using the `configure()` function:
+Side note: The future is now.
+
+
+## Localization
+
+By default, all output is in English, but you can easily change this. Damals uses the [globalization](https://github.com/martinandert/globalization) package for its translations. You can register new translations for your locale with the `registerTranslations` function:
 
 ```js
-timeAgo.configure({
-  translations: {
-    de: {
-      about_one_month: "vor ungefähr einem Monat"
-    }
-  }
-});
+var translator = require('globalization');
+var timeAgo    = require('damals');
+
+translator.registerTranslations(timeAgo.translationScope, 'es', require('./locales/es'));
+// or you can call the provided shortcut function which does the same:
+timeAgo.registerTranslations('es', require('./locales/es'));
+
+timeAgo(Date.now())   // => "just now"
+
+// invoke this on app initialization or when the user changes her language preference
+translator.locale('es');
+
+timeAgo(Date.now())   // => "en este momento"
 ```
 
-Now you can call the exported function with an options parameter containing the desired locale:
+The translation data you provide as last argument to `registerTranslations` must have the same keys as specified in [the English locale file](locales/en.json).
+
+
+# Built-in Translations
+
+Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed. Luckily, damals has a helper function for this:
 
 ```js
-timeAgo(new Date("2014-01-16"), { locale: "de" }) // => "vor ungefähr einem Monat"
+timeAgo.registerBuiltInTranslations('de');
+
+// which is a shortcut for calling
+timeAgo.registerTranslations('de', require(damals_package_dir + '/locales/en'))
+
+// which is again a shortcut for calling
+translator.registerTranslations(timeAgo.translationScope, 'de', require(damals_package_dir + '/locales/en'))
 ```
 
-Or you can permanently change the default locale with:
+Pull requests which add other locales are welcome.
 
-```js
-timeAgo.configure({ locale: "de" });
-```
 
-In order to retrieve the [default configuration](defaults.js) just read the `defaults` property:
+## Contributing
 
-```js
-timeAgo.defaults // => { locale: 'en', translations: { en: { ... } } }
-```
+Here's a quick guide:
 
-Take a look at the [spec.js](spec.js) file for more examples.
+1. Fork the repo and `make install`.
 
-The future is now.
+2. Run the tests. We only take pull requests with passing tests, and it's great to know that you have a clean slate: `make test`
+
+3. Add a test for your change. Only refactoring and documentation changes require no new tests. If you are adding functionality or are fixing a bug, we need a test!
+
+4. Make the test pass.
+
+5. Push to your fork and submit a pull request.
 
 
 ## Licence
