@@ -53,17 +53,15 @@ The translation data you provide as last argument to `registerTranslations` must
 
 ### Built-in Translations
 
-Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed. Luckily, damals has a helper function for this:
+Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed. For your convenience, damals provides a helper function for this:
 
 ```js
-timeAgo.registerBuiltInTranslations('de');
+timeAgo.registerTranslations('de', require('damals/locales/de'));
 
 // which is a shortcut for calling
-timeAgo.registerTranslations('de', require(damals_package_dir + '/locales/de'))
-
-// which is again a shortcut for calling
 translator.registerTranslations(
-    timeAgo.translationScope, 'de', require(damals_package_dir + '/locales/de'))
+    timeAgo.translationScope, 'de', 
+    require('damals/locales/de'));
 ```
 
 Pull requests which add other locales are welcome.

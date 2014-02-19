@@ -62,13 +62,8 @@ function registerTranslations(locale, data) {
   translate.registerTranslations(translationNamespace, locale, data);
 }
 
-function registerBuiltInTranslations(locale) {
-  registerTranslations(locale, require('./locales/' + locale));
-}
-
-registerBuiltInTranslations('en');
+registerTranslations('en', require('./locales/en.json'));
 
 module.exports = damals;
 module.exports.translationNamespace = translationNamespace;
 module.exports.registerTranslations = registerTranslations;
-module.exports.registerBuiltInTranslations = registerBuiltInTranslations;
