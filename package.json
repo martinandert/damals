@@ -26,7 +26,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "globalization": "~0.0.2"
+    "globalization": "~0.0.4"
   },
   "devDependencies": {
     "semver": "~2.2.1",

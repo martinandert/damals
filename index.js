@@ -1,7 +1,7 @@
 'use strict';
 
 var translate = require('globalization').translate;
-var translationScope = 'damals';
+var translationNamespace = 'damals';
 
 function damals(date) {
   var now  = Date.now();
@@ -13,7 +13,7 @@ function damals(date) {
   var minutes = Math.round((now - then) / 60000.0);
   var seconds = Math.round((now - then) / 1000.0);
 
-  return translate.withScope(translationScope, function() {
+  return translate.withNamespace(translationNamespace, function() {
     switch (true) {
       case (minutes < 2):
         switch (true) {
@@ -59,7 +59,7 @@ function damals(date) {
 }
 
 function registerTranslations(locale, data) {
-  translate.registerTranslations(translationScope, locale, data);
+  translate.registerTranslations(translationNamespace, locale, data);
 }
 
 function registerBuiltInTranslations(locale) {
@@ -69,6 +69,6 @@ function registerBuiltInTranslations(locale) {
 registerBuiltInTranslations('en');
 
 module.exports = damals;
-module.exports.translationScope = translationScope;
+module.exports.translationNamespace = translationNamespace;
 module.exports.registerTranslations = registerTranslations;
 module.exports.registerBuiltInTranslations = registerBuiltInTranslations;

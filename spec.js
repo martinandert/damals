@@ -52,11 +52,11 @@ describe('damals()', function() {
     var previousLocale;
 
     beforeEach(function() {
-      previousLocale = g11n.locale('de');
+      previousLocale = g11n.setLocale('de');
     });
 
     afterEach(function() {
-      g11n.locale(previousLocale);
+      g11n.setLocale(previousLocale);
     });
 
     it('still reports the correct time ago in words', function() {

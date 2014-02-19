@@ -43,7 +43,7 @@ timeAgo.registerTranslations('es', require('./locales/es'));
 timeAgo(Date.now())   // => "just now"
 
 // invoke this on app initialization or when the user changes her language preference
-translator.locale('es');
+translator.setLocale('es');
 
 timeAgo(Date.now())   // => "en este momento"
 ```
