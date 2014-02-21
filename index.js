@@ -1,6 +1,6 @@
 'use strict';
 
-var translate = require('globalization').translate;
+var translate = require('globalization');
 var translationNamespace = 'damals';
 
 function damals(date) {
@@ -13,7 +13,7 @@ function damals(date) {
   var minutes = Math.round((now - then) / 60000.0);
   var seconds = Math.round((now - then) / 1000.0);
 
-  return translate.withNamespace(translationNamespace, function() {
+  return translate.withScope(translationNamespace, function() {
     switch (true) {
       case (minutes < 2):
         switch (true) {
@@ -59,7 +59,7 @@ function damals(date) {
 }
 
 function registerTranslations(locale, data) {
-  translate.registerTranslations(translationNamespace, locale, data);
+  translate.registerTranslations(locale, data);
 }
 
 registerTranslations('en', require('./locales/en.json'));

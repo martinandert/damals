@@ -60,6 +60,7 @@ describe('damals()', function() {
     });
 
     it('still reports the correct time ago in words', function() {
+      timeAgo.registerTranslations('de', require('globalization/locales/de'));
       timeAgo.registerTranslations('de', require('./locales/de'));
 
       assert.equal(timeAgo(new Date()),               'gerade eben');
