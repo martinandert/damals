@@ -19,9 +19,9 @@ The module exports a function which when called expects as sole argument a past 
 ```js
 var timeAgo = require('damals');
 
-timeAgo(Date.now())             // => "just now"
-timeAgo(Date.now() - 30000)     // => "half a minute ago"
-timeAgo(new Date("1976-12-10")) // => "about 37 years ago"
+timeAgo(Date.now())             // => 'just now'
+timeAgo(Date.now() - 30000)     // => 'half a minute ago'
+timeAgo(new Date('1976-12-10')) // => 'about 37 years ago'
 ```
 
 Side note: The future is now.
@@ -35,17 +35,15 @@ By default, all output is in English, but you can easily change this. Damals use
 var translator = require('globalization');
 var timeAgo    = require('damals');
 
-translator.registerTranslations(
-    timeAgo.translationScope, 'es', require('./locales/es'));
-// or you can call the provided shortcut function which does the same:
-timeAgo.registerTranslations('es', require('./locales/es'));
+translator.registerTranslations('de', require('globalization/locales/de'));
+translator.registerTranslations('de', require('./locales/de'));
 
-timeAgo(Date.now())   // => "just now"
+timeAgo(Date.now())   // => 'just now'
 
 // invoke this on app initialization or when the user changes her language preference
-translator.setLocale('es');
+translator.setLocale('de');
 
-timeAgo(Date.now())   // => "en este momento"
+timeAgo(Date.now())   // => 'gerade eben'
 ```
 
 The translation data you provide as last argument to `registerTranslations` must have the same keys as specified in [the English locale file](locales/en.json).
@@ -53,15 +51,11 @@ The translation data you provide as last argument to `registerTranslations` must
 
 ### Built-in Translations
 
-Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed. For your convenience, damals provides a helper function for this:
+Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed:
 
 ```js
-timeAgo.registerTranslations('de', require('damals/locales/de'));
-
-// which is a shortcut for calling
-translator.registerTranslations(
-    timeAgo.translationScope, 'de', 
-    require('damals/locales/de'));
+translator.registerTranslations('de', require('globalization/locales/de'));
+translator.registerTranslations('de', require('damals/locales/de'));
 ```
 
 Pull requests which add other locales are welcome.
