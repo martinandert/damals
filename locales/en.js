@@ -1,0 +1,57 @@
+module.exports = {
+  damals: {
+    just_now: 'just now',
+
+    less_than_x_seconds_ago: {
+      one:   'less than a second ago',
+      other: 'less than %(count)s seconds ago'
+    },
+
+    half_a_minute_ago: 'half a minute ago',
+
+    less_than_x_minutes_ago: {
+      one:   'less than a minute ago',
+      other: 'less than %(count)s minutes ago'
+    },
+
+    x_minutes_ago: {
+      one:   'one minute ago',
+      other: '%(count)s minutes ago'
+    },
+
+    about_x_hours_ago: {
+      one:   'about one hour ago',
+      other: 'about %(count)s hours ago'
+    },
+
+    x_days_ago: {
+      one:   'one day ago',
+      other: '%(count)s days ago'
+    },
+
+    about_x_months_ago: {
+      one:   'about one month ago',
+      other: 'about %(count)s months ago'
+    },
+
+    x_months_ago: {
+      one:   'one month ago',
+      other: '%(count)s months ago'
+    },
+
+    about_x_years_ago: {
+      one:   'about one year ago',
+      other: 'about %(count)s years ago'
+    },
+
+    over_x_years_ago: {
+      one:   'over one year ago',
+      other: 'over %(count)s years ago'
+    },
+
+    almost_x_years_ago: {
+      one:   'almost one year ago',
+      other: 'almost %(count)s years ago'
+    }
+  }
+};

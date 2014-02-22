@@ -57,6 +57,6 @@ function damals(date) {
   });
 }
 
-translate.registerTranslations('en', require('./locales/en.json'));
+translate.registerTranslations('en', require('./locales/en'));
 
 module.exports = damals;

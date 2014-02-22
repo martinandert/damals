@@ -46,12 +46,12 @@ translator.setLocale('de');
 timeAgo(Date.now())   // => 'gerade eben'
 ```
 
-The translation data you provide as last argument to `registerTranslations` must have the same keys as specified in [the English locale file](locales/en.json).
+The translation data you provide as last argument to `registerTranslations` must have the same keys as specified in [the English locale file](locales/en.js).
 
 
 ### Built-in Translations
 
-Apart from English, damals comes with built-in support for the German language (see [file](locales/de.json)). This is opt-in, meaning you have to manually register the translation data when needed:
+Apart from English, damals comes with built-in support for the German language (see [file](locales/de.js)). This is opt-in, meaning you have to manually register the translation data when needed:
 
 ```js
 translator.registerTranslations('de', require('globalization/locales/de'));
