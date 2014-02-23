@@ -54,4 +54,4 @@ module.exports = {
       other: 'vor fast %(count)s Jahren'
     }
   }
-}
+};
