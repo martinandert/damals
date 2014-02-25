@@ -1,6 +1,6 @@
-var assert  = require('assert');
-var toDate  = require('to-date');
-var g11n    = require('globalization');
+var assert      = require('assert');
+var toDate      = require('to-date');
+var counterpart = require('counterpart');
 
 var timeAgo = require('./');
 
@@ -52,16 +52,16 @@ describe('damals()', function() {
     var previousLocale;
 
     beforeEach(function() {
-      previousLocale = g11n.setLocale('de');
+      previousLocale = counterpart.setLocale('de');
     });
 
     afterEach(function() {
-      g11n.setLocale(previousLocale);
+      counterpart.setLocale(previousLocale);
     });
 
     it('still reports the correct time ago in words', function() {
-      g11n.registerTranslations('de', require('globalization/locales/de'));
-      g11n.registerTranslations('de', require('./locales/de'));
+      counterpart.registerTranslations('de', require('counterpart/locales/de'));
+      counterpart.registerTranslations('de', require('./locales/de'));
 
       assert.equal(timeAgo(new Date()),               'gerade eben');
       assert.equal(timeAgo(toDate('0 seconds ago' )), 'gerade eben');

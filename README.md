@@ -29,13 +29,13 @@ Side note: The future is now.
 
 ## Localization
 
-By default, all output is in English, but you can easily change this. Damals uses the [globalization](https://github.com/martinandert/globalization) package for its translations. You can register new translations for your locale with the `registerTranslations` function:
+By default, all output is in English, but you can easily change this. Damals uses the [counterpart](https://github.com/martinandert/counterpart) package for its translations. You can register new translations for your locale with the `registerTranslations` function:
 
 ```js
-var translator = require('globalization');
+var translator = require('counterpart');
 var timeAgo    = require('damals');
 
-translator.registerTranslations('de', require('globalization/locales/de'));
+translator.registerTranslations('de', require('counterpart/locales/de'));
 translator.registerTranslations('de', require('./locales/de'));
 
 timeAgo(Date.now())   // => 'just now'
@@ -54,7 +54,7 @@ The translation data you provide as last argument to `registerTranslations` must
 Apart from English, damals comes with built-in support for the German language (see [file](locales/de.js)). This is opt-in, meaning you have to manually register the translation data when needed:
 
 ```js
-translator.registerTranslations('de', require('globalization/locales/de'));
+translator.registerTranslations('de', require('counterpart/locales/de'));
 translator.registerTranslations('de', require('damals/locales/de'));
 ```
 

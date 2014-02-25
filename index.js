@@ -1,6 +1,6 @@
 'use strict';
 
-var translate = require('globalization');
+var translate = require('counterpart');
 
 function damals(date) {
   var now  = Date.now();
