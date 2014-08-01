@@ -1,6 +1,6 @@
 {
   "name": "damals",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Reports the approximate time ago in words from a specific past date",
   "keywords": [
     "elapsed",
