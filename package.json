@@ -22,18 +22,13 @@
     "url": "https://github.com/martinandert/damals/issues"
   },
   "main": "index.js",
-  "scripts": {
-    "test": "make test"
-  },
   "peerDependencies": {
-    "counterpart": ">= 0.16.0"
+    "counterpart": "^0.16.4"
   },
   "devDependencies": {
-    "semver": "~2.2.1",
-    "node-dev": "~2.1.6",
-    "jshint": "~2.4.3",
-    "mocha": "~1.18.2",
-    "to-date": "~0.1.0",
-    "counterpart": ">= 0.16.0"
+    "counterpart": "^0.16.4",
+    "jshint": "^2.5.10",
+    "mocha": "^2.0.1",
+    "to-date": "^0.1.0"
   }
 }
