@@ -23,10 +23,10 @@
   },
   "main": "index.js",
   "peerDependencies": {
-    "counterpart": "^0.16.4"
+    "counterpart": ">=0.16.0"
   },
   "devDependencies": {
-    "counterpart": "^0.16.4",
+    "counterpart": "^0.17.1",
     "jshint": "^2.5.10",
     "mocha": "^2.0.1",
     "to-date": "^0.1.0"
