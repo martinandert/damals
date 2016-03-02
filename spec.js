@@ -103,4 +103,60 @@ describe('damals()', function() {
       assert.equal(timeAgo(Date.now()), 'gerade eben');
     });
   });
+
+  describe('with locale set to "pt-br"', function() {
+    var previousLocale;
+
+    beforeEach(function() {
+      previousLocale = counterpart.setLocale('pt-br');
+    });
+
+    afterEach(function() {
+      counterpart.setLocale(previousLocale);
+    });
+
+    it('still reports the correct time ago in words', function() {
+      counterpart.registerTranslations('pt-br', require('counterpart/locales/pt-br'));
+      counterpart.registerTranslations('pt-br', require('./locales/pt-br'));
+
+      assert.equal(timeAgo(new Date()),               'agora pouco');
+      assert.equal(timeAgo(toDate('0 seconds ago' )), 'agora pouco');
+      assert.equal(timeAgo(toDate('10 seconds ago')), 'agora pouco');
+      assert.equal(timeAgo(toDate('11 seconds ago')), 'há menos de 20 segundos');
+      assert.equal(timeAgo(toDate('19 seconds ago')), 'há menos de 20 segundos');
+      assert.equal(timeAgo(toDate('20 seconds ago')), 'há meio minuto');
+      assert.equal(timeAgo(toDate('39 seconds ago')), 'há meio minuto');
+      assert.equal(timeAgo(toDate('40 seconds ago')), 'há menos de um minuto');
+      assert.equal(timeAgo(toDate('59 seconds ago')), 'há menos de um minuto');
+      assert.equal(timeAgo(toDate('1 minute ago'  )), 'há um minuto');
+      assert.equal(timeAgo(toDate('2 minutes ago' )), 'há 2 minutos');
+      assert.equal(timeAgo(toDate('44 minutes ago')), 'há 44 minutos');
+      assert.equal(timeAgo(toDate('45 minutes ago')), 'há cerca de uma hora');
+      assert.equal(timeAgo(toDate('89 minutes ago')), 'há cerca de uma hora');
+      assert.equal(timeAgo(toDate('90 minutes ago')), 'há cerca de 2 horas');
+      assert.equal(timeAgo(toDate('23 hours ago'  )), 'há cerca de 23 horas');
+      assert.equal(timeAgo(toDate('24 hours ago'  )), 'há um dia');
+      assert.equal(timeAgo(toDate('41 hours ago'  )), 'há um dia');
+      assert.equal(timeAgo(toDate('42 hours ago'  )), 'há 2 dias');
+      assert.equal(timeAgo(toDate('29 days ago'   )), 'há 29 dias');
+      assert.equal(timeAgo(toDate('30 days ago'   )), 'há cerca de um mês');
+      assert.equal(timeAgo(toDate('59 days ago'   )), 'há cerca de 2 meses');
+      assert.equal(timeAgo(toDate('60 days ago'   )), 'há 2 meses');
+      assert.equal(timeAgo(toDate('364 days ago'  )), 'há 12 meses');
+      assert.equal(timeAgo(toDate('365 days ago'  )), 'há cerca de um ano');
+      assert.equal(timeAgo(toDate('500 days ago'  )), 'há mais de um ano');
+      assert.equal(timeAgo(toDate('700 days ago'  )), 'há quase 2 anos');
+      assert.equal(timeAgo(toDate('2 years ago'   )), 'há cerca de 2 anos');
+      assert.equal(timeAgo(toDate('900 days ago'  )), 'há mais de 2 anos');
+      assert.equal(timeAgo(toDate('1050 days ago' )), 'há quase 3 anos');
+      assert.equal(timeAgo(toDate('3 years ago'   )), 'há cerca de 3 anos');
+
+      // the future is now
+      assert.equal(timeAgo(toDate('42 seconds from now' )), 'agora pouco');
+      assert.equal(timeAgo(toDate('42 hours from now'   )), 'agora pouco');
+
+      // you can also provide the number of milliseconds since 1970/01/01
+      assert.equal(timeAgo(Date.now()), 'agora pouco');
+    });
+  });
 });

@@ -51,7 +51,7 @@ The translation data you provide as last argument to `registerTranslations` must
 
 ### Built-in Translations
 
-Apart from English, damals comes with built-in support for the German language (see [file](locales/de.js)). This is opt-in, meaning you have to manually register the translation data when needed:
+Apart from English, damals comes with built-in support for the German (see [file](locales/de.js)) and Brazilian Portuguese (see [file](locales/pt-br.js)) languages. This is opt-in, meaning you have to manually register the translation data when needed:
 
 ```js
 translator.registerTranslations('de', require('counterpart/locales/de'));
