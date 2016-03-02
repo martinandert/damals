@@ -1,3 +1,5 @@
+'use strict';
+
 var assert      = require('assert');
 var toDate      = require('to-date');
 var counterpart = require('counterpart');
@@ -59,7 +61,7 @@ describe('damals()', function() {
       counterpart.setLocale(previousLocale);
     });
 
-    it('still reports the correct time ago in words', function() {
+    it('reports the correct time ago in words', function() {
       counterpart.registerTranslations('de', require('counterpart/locales/de'));
       counterpart.registerTranslations('de', require('./locales/de'));
 
@@ -115,7 +117,7 @@ describe('damals()', function() {
       counterpart.setLocale(previousLocale);
     });
 
-    it('still reports the correct time ago in words', function() {
+    it('reports the correct time ago in words', function() {
       counterpart.registerTranslations('pt-br', require('counterpart/locales/pt-br'));
       counterpart.registerTranslations('pt-br', require('./locales/pt-br'));
 

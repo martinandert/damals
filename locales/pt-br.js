@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   damals: {
     just_now: 'agora pouco',
