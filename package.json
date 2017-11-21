@@ -26,7 +26,7 @@
     "counterpart": ">=0.16.0"
   },
   "devDependencies": {
-    "counterpart": "^0.17.2",
+    "counterpart": "^0.18.4",
     "jshint": "^2.5.10",
     "mocha": "^2.0.1",
     "to-date": "^0.1.0"

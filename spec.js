@@ -106,6 +106,62 @@ describe('damals()', function() {
     });
   });
 
+  describe('with locale set to "nl"', function() {
+    var previousLocale;
+
+    beforeEach(function() {
+      previousLocale = counterpart.setLocale('nl');
+    });
+
+    afterEach(function() {
+      counterpart.setLocale(previousLocale);
+    });
+
+    it('reports the correct time ago in words', function() {
+      counterpart.registerTranslations('nl', require('counterpart/locales/nl'));
+      counterpart.registerTranslations('nl', require('./locales/nl'));
+
+      assert.equal(timeAgo(new Date()),               'zojuist');
+      assert.equal(timeAgo(toDate('0 seconds ago' )), 'zojuist');
+      assert.equal(timeAgo(toDate('10 seconds ago')), 'zojuist');
+      assert.equal(timeAgo(toDate('11 seconds ago')), 'minder dan 20 seconden geleden');
+      assert.equal(timeAgo(toDate('19 seconds ago')), 'minder dan 20 seconden geleden');
+      assert.equal(timeAgo(toDate('20 seconds ago')), 'een halve minuut geleden');
+      assert.equal(timeAgo(toDate('39 seconds ago')), 'een halve minuut geleden');
+      assert.equal(timeAgo(toDate('40 seconds ago')), 'minder dan een minuut geleden');
+      assert.equal(timeAgo(toDate('59 seconds ago')), 'minder dan een minuut geleden');
+      assert.equal(timeAgo(toDate('1 minute ago'  )), 'een minuut geleden');
+      assert.equal(timeAgo(toDate('2 minutes ago' )), '2 minuten geleden');
+      assert.equal(timeAgo(toDate('44 minutes ago')), '44 minuten geleden');
+      assert.equal(timeAgo(toDate('45 minutes ago')), 'ongeveer een uur geleden');
+      assert.equal(timeAgo(toDate('89 minutes ago')), 'ongeveer een uur geleden');
+      assert.equal(timeAgo(toDate('90 minutes ago')), 'ongeveer 2 uur geleden');
+      assert.equal(timeAgo(toDate('23 hours ago'  )), 'ongeveer 23 uur geleden');
+      assert.equal(timeAgo(toDate('24 hours ago'  )), 'één dag geleden');
+      assert.equal(timeAgo(toDate('41 hours ago'  )), 'één dag geleden');
+      assert.equal(timeAgo(toDate('42 hours ago'  )), '2 dagen geleden');
+      assert.equal(timeAgo(toDate('29 days ago'   )), '29 dagen geleden');
+      assert.equal(timeAgo(toDate('30 days ago'   )), 'ongeveer een maand geleden');
+      assert.equal(timeAgo(toDate('59 days ago'   )), 'ongeveer 2 maanden geleden');
+      assert.equal(timeAgo(toDate('60 days ago'   )), '2 maanden geleden');
+      assert.equal(timeAgo(toDate('364 days ago'  )), '12 maanden geleden');
+      assert.equal(timeAgo(toDate('365 days ago'  )), 'ongeveer een jaar geleden');
+      assert.equal(timeAgo(toDate('500 days ago'  )), 'meer dan een jaar geleden');
+      assert.equal(timeAgo(toDate('700 days ago'  )), 'bijna 2 jaar geleden');
+      assert.equal(timeAgo(toDate('2 years ago'   )), 'ongeveer 2 jaar geleden');
+      assert.equal(timeAgo(toDate('900 days ago'  )), 'meer dan 2 jaar geleden');
+      assert.equal(timeAgo(toDate('1050 days ago' )), 'bijna 3 jaar geleden');
+      assert.equal(timeAgo(toDate('3 years ago'   )), 'ongeveer 3 jaar geleden');
+
+      // the future is now
+      assert.equal(timeAgo(toDate('42 seconds from now' )), 'zojuist');
+      assert.equal(timeAgo(toDate('42 hours from now'   )), 'zojuist');
+
+      // you can also provide the number of milliseconds since 1970/01/01
+      assert.equal(timeAgo(Date.now()), 'zojuist');
+    });
+  });
+
   describe('with locale set to "pt-br"', function() {
     var previousLocale;
 
